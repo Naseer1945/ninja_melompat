@@ -74,14 +74,14 @@ def game_loop():
             if event.type == pygame.KEYDOWN and event.key in [pygame.K_SPACE, pygame.K_UP]: player.jump()
             if event.type == pygame.USEREVENT + 1: obstacles.append(Kayu())
 
-        # Update
+        # Update game obstacle, pemain, menghapus obstacle agar tidak menumpuk, mendeteksi tabrakan
         player.update()
         for obs in obstacles[:]:
             obs.update()
             if obs.rect.right < 0: obstacles.remove(obs); score += 1
             if player.rect.colliderect(obs.rect): return # Game Over
 
-        # Draw
+        # Draw menggambar latar, tanah, pemain, obstacle, menampilkan score, menampilkan peringatan
         SCREEN.fill(WHITE)
         pygame.draw.rect(SCREEN, GREEN, (0, GROUND_Y, 800, 20))
         player.draw(SCREEN)
@@ -100,3 +100,4 @@ def game_loop():
 
 if __name__ == "__main__":
     game_loop()
+
